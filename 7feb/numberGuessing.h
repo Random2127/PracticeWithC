@@ -1,12 +1,18 @@
+#ifndef NUMBER_GUESSING_H
+#define NUMBER_GUESSING_H
+
+void startNumber(int attempts);
+
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int main()
+void startNumber(int attempts)
 {
     int random;
     int guess;
-    int attempts = 0;
 
     srand(time(0));
     random = rand() % 100 + 1;
@@ -15,7 +21,7 @@ int main()
     {
         printf("Enter a number between 1 and 100: ");
         scanf("%d", &guess);
-        attempts++;
+        attempts--;
 
         if (guess < random)
         {
@@ -31,8 +37,6 @@ int main()
             break;
         }
 
-    } while (guess != random);
-    printf("You have needed %d attempts to find it\n", attempts);
-
-    return 0;
+    } while (guess != random && attempts > 0);
+    printf("You have %d attempts left\n", attempts);
 }
